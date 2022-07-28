@@ -1,0 +1,19 @@
+{
+  "start_date":"2022-03-01",
+  "end_date": "2022-03-30",
+  "keywords": ["groundwater"],
+  "include_comments": "True",
+  "subreddits": [
+    "water",
+    "farming",
+    "homestead",
+    "irrigation",
+    "hydrology",
+    "agronomy",
+    "gis",
+    "civil engineering",
+    "hydroponics"],
+  "save_every": 10, 
+  "file_format": "csv", 
+  "restart_from_file": "false"
+}
