@@ -1,9 +1,11 @@
 import pandas as pd
 from bertopic import BERTopic
+from sentence_transformers import SentenceTransformer
+
 
 
 def topic_model(docs):
-    model = BERTopic(low_memory=True)
+    model = BERTopic(verbose=True)
     topics, probs = model.fit_transform(docs)
     return topics
 
@@ -27,6 +29,6 @@ if __name__ == "__main__":
     ]
 
     documents = clean_for_topic_modeling(output_files)
-    print(documents)
+    print(f"Loaded {len(documents)} documents.")
     topics = topic_model(documents)
     print(topics)

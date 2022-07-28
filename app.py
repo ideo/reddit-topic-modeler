@@ -4,7 +4,7 @@ import streamlit as st
 
 import logic as lg
 from scrape import Scrape
-from topic_model import topic_model
+# from topic_model import topic_model
 
 
 st.header("Scrape Reddit")
@@ -60,7 +60,7 @@ if scrape:
 if scraper.documents:
     st.dataframe(scraper.documents)
 
-    topics = topic_model(scraper.documents)
-    st.dataframe(topics)
+    # topics = topic_model(scraper.documents)
+    # st.dataframe(topics)
 
 
