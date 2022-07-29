@@ -139,8 +139,12 @@ class Scrape:
         # self.documents = []
         for filepath in self.output_files:
             df = pd.read_csv(filepath)
-            for ttl, body in zip(df["title"].values, df["body"].values):
-                if isinstance(ttl, str) and ttl != "":
-                    self.documents.append(ttl)
-                if isinstance(body, str) and body != "":
-                    self.documents.append(body)
+            try:
+                for ttl, body in zip(df["title"].values, df["body"].values):
+                    if isinstance(ttl, str) and ttl != "":
+                        self.documents.append(ttl)
+                    if isinstance(body, str) and body != "":
+                        self.documents.append(body)
+            except KeyError:
+                # Empty file. No scrape results.
+                pass

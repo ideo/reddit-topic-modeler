@@ -12,12 +12,26 @@ def initialize_session_state():
 
     if "subreddits" not in st.session_state:
         st.session_state["subreddits"] = config["subreddits"]
-        # st.session_state["subreddits_to_scrape"]  = config["subreddits"]
 
     if "keywords" not in st.session_state:
         st.session_state["keywords"] = []
 
     return config
+
+
+def multiselect_with_addition(label1, label2, key_default, key_selections):
+    """
+    """
+    new_addition = st.text_input(label1)
+    if new_addition and new_addition not in st.session_state[key_default]:
+        st.session_state[key_default].append(new_addition)
+
+    _ = st.multiselect(
+        label2, 
+        options=st.session_state[key_default],
+        default=st.session_state[key_default],
+        key=key_selections
+        )
 
 
 def save_config_file(config):
