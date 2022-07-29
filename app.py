@@ -8,6 +8,12 @@ import logic as lg
 from scrape import Scrape
 
 
+st.set_page_config(
+    page_title="Scrape Reddit",
+    page_icon="img/reddit-logo.png"
+)
+
+
 st.header("Scrape Reddit")
 
 
