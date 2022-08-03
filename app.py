@@ -21,18 +21,11 @@ config = lg.initialize_session_state()
 
 st.write("")
 st.subheader("Choose Subreddits")
-new_one = st.text_input(
-    "Add new subreddits to the list.",
-)
-if new_one and new_one not in st.session_state["subreddits"]:
-    st.session_state["subreddits"].append(new_one)
-
-_ = st.multiselect(
-    "Which subreddits should we scrape?",
-    options=st.session_state["subreddits"],
-    default=config["subreddits"],
-    key = "subreddits_to_scrape"
-)
+label1 = "Add new subreddits to the list."
+label2 = "Which subreddits should we scrape?"
+key1 = "subreddits"
+key2 = "subreddits_to_scrape"
+lg.multiselect_with_addition(label1, label2, key1, key2)
 
 
 st.write("")
@@ -47,7 +40,7 @@ lg.multiselect_with_addition(label1, label2, key1, key2)
 st.write("")
 st.subheader("Scrape the Internet!")
 st.write("Actually, just Reddit.")
-scraper = Scrape()
+scraper = Scrape(skip_if_file_exists=False)
 scrape = st.button("Scrape!")
 
 if scrape:
@@ -60,6 +53,12 @@ if scraper.documents:
         df.drop(columns=["Unnamed: 0"], inplace=True)
         st.markdown(f"**{kw}**")
         st.dataframe(df)
-    # st.dataframe(scraper.documents)
+    
+        st.download_button("Download CSV",
+            df.to_csv().encode("utf-8"),
+            f"{kw}.csv",
+            "text/csv",
+            key=f"{kw}_dwnld"
+            )
 
 

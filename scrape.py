@@ -14,9 +14,10 @@ OUTPUT_FOLDER_IN_PROGRESS = f"{OUTPUT_FOLDER}/in_progress"
 
 
 class Scrape:
-    def __init__(self):
+    def __init__(self, skip_if_file_exists=True):
         # self.parse_config_file()
         # self.create_output_folder()
+        self.skip_if_file_exists = skip_if_file_exists
         self.documents = []
 
 
@@ -84,7 +85,7 @@ class Scrape:
         )
 
         # skipping the rest of the loop if the file exists (this is to avoid re-downloading)
-        if os.path.isfile(filename_complete):
+        if self.skip_if_file_exists and os.path.isfile(filename_complete):
             print(f"\n\n***\n{keyword} file present\n***\n\n")
 
         else:
